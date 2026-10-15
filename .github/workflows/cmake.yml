@@ -1,0 +1,38 @@
+name: CMake CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.os }} / C++17
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@v4
+
+      - name: Configurar CMake
+        run: >-
+          cmake -S . -B build
+          -DBIGDECIMAL_BUILD_TESTS=ON
+          -DBIGDECIMAL_BUILD_EXAMPLE=ON
+          -DBIGDECIMAL_WARNINGS_AS_ERRORS=ON
+
+      - name: Compilar
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Ejecutar pruebas
+        run: ctest --test-dir build --build-config Release --output-on-failure

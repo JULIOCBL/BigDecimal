@@ -1,0 +1,10 @@
+BigDecimal C++ contains a native C++ adaptation of mathematical algorithms and
+observable behavior from OpenJDK 23.0.2, including work covered by notices for
+Oracle and/or its affiliates and IBM Corporation. The adapted source is
+distributed under GNU General Public License version 2 with the Classpath
+exception reproduced in LICENSE.
+
+The C++ representation, API adaptations, tests, examples, and native build
+integration include changes made for this project. The C++ library does not
+require a Java runtime to build or run. Its serialization codec intentionally
+uses the documented Java Object Serialization wire format for interoperability.

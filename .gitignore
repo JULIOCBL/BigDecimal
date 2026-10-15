@@ -1,0 +1,32 @@
+# Salidas de CMake y compilaciones locales
+/build*/
+/cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+compile_commands.json
+Testing/
+
+# Artefactos de compilación
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.class
+*.jar
+*.dSYM/
+
+# Configuración y archivos temporales del entorno
+CMakeUserPresets.json
+.DS_Store
+__pycache__/
+*.py[cod]
+.analysis/
+.tools/
