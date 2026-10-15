@@ -54,6 +54,15 @@ ctest --test-dir build --output-on-failure
 ./build/bigdecimal_example
 ```
 
+CTest incluye contratos de API y serialización, además de pruebas de casos
+financieros y de compatibilidad matemática: redondeo, límites de escala,
+conversiones, formatos, raíces y operaciones con entradas deterministas
+generadas. Para repetir solo las pruebas:
+
+```sh
+ctest --test-dir build --output-on-failure
+```
+
 La salida del ejemplo es similar a:
 
 ```text
