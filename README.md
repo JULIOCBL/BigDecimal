@@ -2,9 +2,9 @@
 
 Biblioteca de aritmética decimal de precisión arbitraria, nativa y escrita en
 C++17. Incluye también `BigInteger`, contextos de precisión, redondeo y un
-codec para intercambiar los tipos matemáticos admitidos mediante el formato de
-serialización de objetos documentado por Java. No necesita una instalación de
-Java para compilar ni para ejecutar.
+codec de serialización binaria para intercambiar los tipos matemáticos
+admitidos. Es una biblioteca nativa: no necesita ningún runtime externo ni
+dependencias adicionales para compilar ni para ejecutar.
 
 ## Contenido
 
@@ -291,9 +291,11 @@ const auto restaurados = BigDecimalSerialization::deserializeAll(flujo);
 ```
 
 `ReadLimits` permite limitar tamaño de entrada, cantidad de referencias y
-profundidad al decodificar datos no confiables. Este codec implementa el formato
-de serialización compatible para los tipos indicados; no restaura grafos
-arbitrarios de objetos.
+profundidad al decodificar datos no confiables. El codec implementa el formato
+de serialización de objetos binario con encabezado `0xACED0005`, descriptores de
+clase y `serialVersionUID`, de modo que los datos pueden intercambiarse con
+cualquier otra implementación de ese formato para los tipos indicados. No
+restaura grafos arbitrarios de objetos.
 
 ## Redondeo
 
@@ -320,13 +322,15 @@ específicos como `ArithmeticError`, `NumberFormatError`, `IOError` y
 `CorruptStreamError`, compatibles con esas jerarquías de captura.
 
 La memoria y los límites de tamaño dependen de la plataforma y de la memoria
-disponible. No se emulan la JVM ni sus excepciones, recolector, optimizaciones o
-rendimiento interno. La compatibilidad de resultados debe evaluarse con pruebas
-para las operaciones y casos límite que use cada aplicación.
+disponible. Las excepciones, la gestión de memoria y el rendimiento son los
+nativos de C++: no se emula ninguna máquina virtual ni su recolector,
+optimizaciones o comportamiento interno. La compatibilidad de resultados debe
+evaluarse con pruebas para las operaciones y casos límite que use cada
+aplicación.
 
 ## Licencia y atribución
 
-El código matemático incluye adaptaciones de algoritmos y comportamiento de
-OpenJDK 23.0.2. Consulta `NOTICE` para la atribución y `LICENSE` para GPLv2 con
-Classpath Exception. Conserva los avisos de origen al redistribuir. La biblioteca
-nativa no requiere un runtime Java.
+El código matemático incluye adaptaciones de algoritmos y comportamiento de una
+implementación de referencia; los avisos de origen se conservan en los
+encabezados. Consulta `NOTICE` para la atribución completa y `LICENSE` para GPLv2
+con Classpath Exception. Conserva los avisos de origen al redistribuir.
